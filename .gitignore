@@ -19,6 +19,7 @@ bin/
 build/
 target/
 *.log
+.class
 logs/
 .DS_Store
 
