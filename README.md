@@ -45,7 +45,6 @@ Following fields in response are available for any website:
 - list of child modes
 
 - Similar child urls are ignored to prevent looping.
-
 - Max allowed depth for the service is used to prevent accidental high depth queries that may abrupt the service causing DOS.
 - Cache implementation Cafeinne is used that provides good support for auto expiry of cached items, well internally management of cached objects - like count etc.
 - Swagger API docs and UI specs are available - http://localhost:8100/web-crawler-service/swagger-ui.html. Little config give it without effort but handy and useful for clients/testers
