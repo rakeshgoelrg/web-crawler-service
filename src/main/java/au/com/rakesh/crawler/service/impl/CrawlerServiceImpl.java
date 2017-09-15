@@ -84,7 +84,7 @@ public class CrawlerServiceImpl implements CrawlerService {
             final String title = doc.title();
             log.debug("Fetched title: {}, links[{}] for url: {}", title, links.nextAll(), url);
             return Optional.of(new PageInfo(title, url, links));
-        } catch (final IOException e) {
+        } catch (final IOException | IllegalArgumentException e) {
             log.error(String.format("Error getting contents of url %s", url), e);
             return Optional.empty();
         }
