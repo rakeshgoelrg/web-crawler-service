@@ -18,6 +18,9 @@ $ ./gradlew clean build
 ## Running the program in local mode
 After building the application you can run the service by performing the following steps:
 
+1. At the top-level project directory run a local instance of ActiveMQ by using the supplied docker-compose script:
+$ docker-compose up -d
+
 1. At the top-level directory run the following command to start the Spring Boot executable which launches the application:
 $ java -jar ./build/web-crawler-service-*[1.0.0-SNAPSHOT]*-exec.jar
 
@@ -41,6 +44,8 @@ Following fields in response are available for any website:
 - title
 - list of child modes
 
+- Similar child urls are ignored to prevent looping.
+
 - Max allowed depth for the service is used to prevent accidental high depth queries that may abrupt the service causing DOS.
 - Cache implementation Cafeinne is used that provides good support for auto expiry of cached items, well internally management of cached objects - like count etc.
 - Swagger API docs and UI specs are available - http://localhost:8100/web-crawler-service/swagger-ui.html. Little config give it without effort but handy and useful for clients/testers
@@ -52,4 +57,9 @@ Some tools used for speeding up the development:
 - Spring rest server is generated from http://editor.swagger.io using OpenAPI spec.
 - Standard development practice that I normally follow at work is used.
 - Basic security is designed in OpenAPI spec though JWT or auth2 can be used to protect the endpoint.
+
+
+## Improvements TODO
+- Proxy support for HttpClient
 - Automation tests can be added but running out of time. Happy that the whole solution is working!!!
+
