@@ -1,0 +1,137 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+ext {
+    javaVersion = JavaVersion.VERSION_1_8
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+    }
+
+    exclude group: 'commons-logging', module: 'commons-logging'
+}
+
+tasks.withType(JavaCompile) {
+    options.debug = true
+    options.encoding = 'UTF-8'
+    options.incremental = true
+    options.warnings = false
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:1.5.6.RELEASE'
+        mavenBom 'com.fasterxml.jackson:jackson-bom:2.9.0'
+    }
+
+    dependencies {
+        dependencySet(group: 'org.slf4j', version: '1.7.25') {
+            entry 'slf4j-api'
+            entry 'slf4j-ext'
+        }
+        dependency(name: 'logback-classic', group: 'ch.qos.logback', version: '1.2.3')
+
+        dependency(name: 'commons-lang3', group: 'org.apache.commons', version: '3.6')
+        dependency(name: 'guava', group: 'com.google.guava', version: '22.0')
+
+        dependencySet(group: 'io.springfox', version: '2.7.0') {
+            entry 'springfox-swagger2'
+            entry 'springfox-swagger-ui'
+        }
+
+        dependencySet(group: 'io.swagger', version: '1.5.16') {
+            entry 'swagger-annotations'
+            entry 'swagger-models'
+        }
+        dependency(name: 'swagger-codegen', group: 'io.swagger', version: '2.2.3')
+
+        // re-check
+        dependency(name: 'cache-api', group: 'javax.cache', version: '1.0.0')
+        dependency(name: 'caffeine', group: 'com.github.ben-manes', version: '2.5.4')
+        dependency(name: 'javax.inject', group: 'javax.inject', version: '1')
+        dependency(name: 'lombok', group: 'org.projectlombok', version: '1.16.18')
+
+        // Test dependencies
+        dependency(name: 'assertj-core', group: 'org.assertj', version: '3.8.0')
+        dependency(name: 'junit', group: 'junit', version: '4.12')
+        dependency(name: 'mockito-all', group: 'org.mockito', version: '1.10.19')
+        dependency(name: 'jsoup', group: 'org.jsoup',  version: '1.10.3')
+    }
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-cache'
+    compile 'org.springframework:spring-oxm:4.3.10.RELEASE'
+    compile 'javax.cache:cache-api'
+    compile 'javax.inject:javax.inject'
+    compile 'org.projectlombok:lombok'
+    compile 'io.springfox:springfox-swagger2'
+    compile 'io.springfox:springfox-swagger-ui'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile 'com.github.ben-manes.caffeine:caffeine'
+    compile 'org.slf4j:slf4j-api'
+    compile 'ch.qos.logback:logback-classic'
+    compile 'com.google.guava:guava'
+    compile 'org.jsoup:jsoup'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    testCompile 'junit:junit'
+    testCompile 'org.mockito:mockito-all'
+    testCompile 'org.assertj:assertj-core'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts.archives sourcesJar, javadocJar
+
+bootRepackage {
+    classifier = 'exec'
+}
+
+artifacts {
+    archives(file("$libsDir/$project.name-$project.version-${bootRepackage.classifier}.jar")) {
+        classifier 'exec'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.1'
+}

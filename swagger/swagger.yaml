@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  description: Web crawler
+  version: 1.0.0
+  title: Web Crawler
+host: localhost
+basePath: /v1
+tags:
+  - name: web-crawler
+    description: Crawl the web pages
+schemes:
+  - http
+paths:
+  /crawler:
+    get:
+      tags:
+        - 'web-crawler'
+      summary: Get the web page tree info upto certain depth
+      operationId: getWebPageTreeInfo
+      produces:
+        - application/json
+      parameters:
+        - name: url
+          in: query
+          description: Url of the webpage for getting tree info
+          required: true
+          type: string
+        - name: depth
+          in: query
+          description: Desired depth for crawling
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PageTreeInfo'
+        '400':
+          description: Invalid page url
+        '401':
+          description: Unauthorized to use the service
+        '404':
+          description: Page not found
+      security:
+        - basicAuth: []
+securityDefinitions:
+  basicAuth:
+    type: basic
+definitions:
+  PageTreeInfo:
+    type: object
+    properties:
+      url:
+        type: string
+        description: page Url
+      title:
+        type: string
+        description: Page title
+      valid:
+        type: boolean
+        description: Page is valid or not
+      depth:
+        type: integer
+        description: depth of this page w.r.t. starting page
+      nodes:
+        type: array
+        items:
+          $ref: '#/definitions/PageTreeInfo'
