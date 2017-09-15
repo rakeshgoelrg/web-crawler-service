@@ -1,4 +1,4 @@
-package au.com.qantas.crawler.service;
+package au.com.rakesh.crawler.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,9 +10,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import au.com.qantas.crawler.CrawlerIntegrationTest;
-import au.com.qantas.crawler.model.PageInfo;
-import au.com.qantas.crawler.model.PageTreeInfo;
+import au.com.rakesh.crawler.CrawlerIntegrationTest;
+import au.com.rakesh.crawler.model.PageInfo;
+import au.com.rakesh.crawler.model.PageTreeInfo;
+import au.com.rakesh.crawler.service.CrawlerService;
 
 @RunWith(SpringRunner.class)
 @CrawlerIntegrationTest
@@ -23,11 +24,11 @@ public class CrawlerServiceImplTest {
 
     @Test
     public void testDeepCrawl() {
-        final PageTreeInfo info = crawlerService.deepCrawl("http://spring.io", 1);
+        final PageTreeInfo info = crawlerService.deepCrawl("http://spring.io", 1, null);
         assertThat(info).isNotNull().satisfies(treeInfo -> {
             assertThat(treeInfo.getTitle()).contains("Spring");
             assertThat(treeInfo.getUrl()).contains("http://spring.io");
-            assertThat(treeInfo.getNodes().size()).isGreaterThan(30);
+            assertThat(treeInfo.getNodes().size()).isGreaterThan(20);
         });
     }
 
@@ -37,7 +38,7 @@ public class CrawlerServiceImplTest {
         assertThat(info).isPresent();
         assertThat(info.get().getTitle()).contains("Google");
         assertThat(info.get().getUrl()).contains("http://google.com");
-        assertThat(info.get().getLinks().size()).isGreaterThan(20);
+        assertThat(info.get().getLinks().size()).isGreaterThan(10);
     }
 
 }

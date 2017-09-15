@@ -1,4 +1,4 @@
-package au.com.qantas.crawler.rest;
+package au.com.rakesh.crawler.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,10 +24,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.google.common.io.Resources;
 
-import au.com.qantas.crawler.CrawlerIntegrationTest;
-import au.com.qantas.crawler.model.PageInfo;
-import au.com.qantas.crawler.model.PageTreeInfo;
-import au.com.qantas.crawler.service.CrawlerService;
+import au.com.rakesh.crawler.CrawlerIntegrationTest;
+import au.com.rakesh.crawler.model.PageInfo;
+import au.com.rakesh.crawler.model.PageTreeInfo;
+import au.com.rakesh.crawler.service.CrawlerService;
 
 /**
  * @author buddy
@@ -71,7 +71,8 @@ public class CrawlerApiControllerTest {
 
         assertThat(mvcResult.getResponse().getContentAsString()).isEmpty();
 
-        Mockito.when(crawlerService.deepCrawl(Mockito.anyString(), Mockito.anyInt())).thenReturn(pageTreeInfo);
+        Mockito.when(crawlerService.deepCrawl(Mockito.anyString(), Mockito.anyInt(), Mockito.anyList()))
+                .thenReturn(pageTreeInfo);
         mvcResult = mockMvc
                 .perform(MockMvcRequestBuilders.get("/crawler?url=something&depth=5")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).accept(MediaType.APPLICATION_JSON))

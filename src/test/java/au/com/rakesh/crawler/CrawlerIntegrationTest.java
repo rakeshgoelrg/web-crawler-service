@@ -1,4 +1,4 @@
-package au.com.qantas.crawler;
+package au.com.rakesh.crawler;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -11,7 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
-import au.com.qantas.crawler.configuration.ApplicationConfiguration;
+import au.com.rakesh.crawler.Application;
+import au.com.rakesh.crawler.configuration.ApplicationConfiguration;
 
 @Inherited
 @Target(ElementType.TYPE)

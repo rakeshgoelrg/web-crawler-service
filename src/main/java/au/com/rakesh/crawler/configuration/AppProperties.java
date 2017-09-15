@@ -1,4 +1,4 @@
-package au.com.qantas.crawler.configuration;
+package au.com.rakesh.crawler.configuration;
 
 import javax.inject.Named;
 import javax.validation.Valid;
@@ -10,19 +10,19 @@ import org.springframework.validation.annotation.Validated;
 import lombok.Data;
 
 /**
- * JavaBean bound to Qantas properties in application configuration.
+ * JavaBean bound to Application properties in application configuration.
  */
 @Data
 @Named
-@ConfigurationProperties(prefix = "qantas")
+@ConfigurationProperties(prefix = "app")
 @Validated
-public class QantasProperties {
+public class AppProperties {
 
     @Valid
     private final CrawlerProperties crawler = new CrawlerProperties();
 
     /**
-     * Nested property group bound to 'qantas.crawler'.
+     * Nested property group bound to 'rakesh.crawler'.
      */
     @Data
     @Validated

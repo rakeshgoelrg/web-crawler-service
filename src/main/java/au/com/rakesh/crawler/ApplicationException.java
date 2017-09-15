@@ -1,4 +1,4 @@
-package au.com.qantas.crawler;
+package au.com.rakesh.crawler;
 
 /**
  * Base class for all exceptions raised internally to signal that an error

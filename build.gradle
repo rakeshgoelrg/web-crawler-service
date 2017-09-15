@@ -1,13 +1,13 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.6.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+  ext {
+    springBootVersion = '1.5.6.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
 }
 
 ext {
@@ -23,7 +23,7 @@ apply plugin: 'org.springframework.boot'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
 configurations.all {
@@ -88,7 +88,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-cache'
-    compile 'org.springframework:spring-oxm:4.3.10.RELEASE'
+    compile 'org.springframework:spring-oxm'
     compile 'javax.cache:cache-api'
     compile 'javax.inject:javax.inject'
     compile 'org.projectlombok:lombok'

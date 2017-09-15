@@ -1,4 +1,4 @@
-package au.com.qantas.crawler.model;
+package au.com.rakesh.crawler.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

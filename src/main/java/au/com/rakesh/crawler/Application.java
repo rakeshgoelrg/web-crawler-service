@@ -1,4 +1,4 @@
-package au.com.qantas.crawler;
+package au.com.rakesh.crawler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

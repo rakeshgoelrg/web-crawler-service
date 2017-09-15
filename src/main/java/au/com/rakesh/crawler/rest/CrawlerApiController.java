@@ -1,4 +1,4 @@
-package au.com.qantas.crawler.rest;
+package au.com.rakesh.crawler.rest;
 
 import java.util.Optional;
 
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import au.com.qantas.crawler.configuration.QantasProperties.CrawlerProperties;
-import au.com.qantas.crawler.model.PageTreeInfo;
-import au.com.qantas.crawler.service.CrawlerService;
+import au.com.rakesh.crawler.configuration.AppProperties.CrawlerProperties;
+import au.com.rakesh.crawler.model.PageTreeInfo;
+import au.com.rakesh.crawler.service.CrawlerService;
 import lombok.extern.slf4j.Slf4j;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-02T22:39:21.740Z")
@@ -27,7 +27,7 @@ public class CrawlerApiController implements CrawlerApi {
     @Inject
     private CrawlerService crawlerService;
 
-    @Value("#{qantasProperties.crawler}")
+    @Value("#{appProperties.crawler}")
     private CrawlerProperties crawlerProperties;
 
     @Override
@@ -40,9 +40,9 @@ public class CrawlerApiController implements CrawlerApi {
         final int newDepth = Integer.min(Optional.ofNullable(depth).orElse(crawlerProperties.getDefaultDepth()),
                 crawlerProperties.getMaxDepthAllowed());
         log.info(
-                "Depth might be optimized to go upto Max defined in property:'qantas.crawler.max-depth-allowed'. optimized depth: {}",
+                "Depth might be optimized to go upto Max defined in property:'app.crawler.max-depth-allowed'. optimized depth: {}",
                 newDepth);
-        return new ResponseEntity<>(crawlerService.deepCrawl(url, depth), HttpStatus.OK);
+        return new ResponseEntity<>(crawlerService.deepCrawl(url, depth, null), HttpStatus.OK);
     }
 
 }

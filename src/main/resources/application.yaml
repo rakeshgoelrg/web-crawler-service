@@ -1,10 +1,10 @@
 logging:
   level:
-    au.com.qantas: 'info'
+    au.com.rakesh: 'info'
     org.springframework: 'info'
     org.apache.http: 'info'
   file: 'logs/${spring.application.name}.log'
-qantas:
+app:
   crawler:
     default-depth: 3
     max-depth-allowed: 5
@@ -40,7 +40,7 @@ spring:
     serialization.indent_output: true
 logging:
   level:
-    au.com.qantas: 'debug'
+    au.com.rakesh: 'debug'
 ---
 
 spring:
@@ -50,7 +50,7 @@ logging:
   pattern:
     file: '[%d{ISO8601}] [%thread] [%level] [%logger] [serviceName:${spring.application.name}] => %msg%n'
   level:
-    au.com.qantas: 'debug'
+    au.com.rakesh: 'debug'
 ---
 
 spring:
@@ -73,7 +73,7 @@ spring:
     serialization.indent_output: true
 logging:
   level:
-    au.com.qantas: 'debug'
+    au.com.rakesh: 'debug'
   pattern:
     console: '[%d{ISO8601}] [%thread] [%level] [%logger] [serviceName:${spring.application.name}] => %msg%n'
 ---

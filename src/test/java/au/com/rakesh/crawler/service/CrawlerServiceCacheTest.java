@@ -1,4 +1,4 @@
-package au.com.qantas.crawler.service;
+package au.com.rakesh.crawler.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,9 +13,10 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.interceptor.SimpleKey;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import au.com.qantas.crawler.CrawlerIntegrationTest;
-import au.com.qantas.crawler.model.PageInfo;
-import au.com.qantas.crawler.model.PageTreeInfo;
+import au.com.rakesh.crawler.CrawlerIntegrationTest;
+import au.com.rakesh.crawler.model.PageInfo;
+import au.com.rakesh.crawler.model.PageTreeInfo;
+import au.com.rakesh.crawler.service.CrawlerService;
 
 @RunWith(SpringRunner.class)
 @CrawlerIntegrationTest
@@ -29,13 +30,13 @@ public class CrawlerServiceCacheTest {
 
     @Test
     public void testCacheOnDeepCrawl() {
-        final PageTreeInfo info = crawlerService.deepCrawl("http://spring.io", 0);
+        final PageTreeInfo info = crawlerService.deepCrawl("http://spring.io", 0, null);
         assertThat(info).isNotNull().satisfies(treeInfo -> {
             assertThat(treeInfo.getTitle()).contains("Spring");
             assertThat(treeInfo.getUrl()).contains("http://spring.io");
         });
         assertThat(applicationCache.getName()).isNotNull();
-        assertThat(applicationCache.get(new SimpleKey("http://spring.io", 0))).isNotNull();
+        assertThat(applicationCache.get(new SimpleKey("http://spring.io", 0, null))).isNotNull();
     }
 
     @Test

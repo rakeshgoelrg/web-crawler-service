@@ -1,4 +1,4 @@
-package au.com.qantas.crawler.configuration;
+package au.com.rakesh.crawler.configuration;
 
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableAutoConfiguration
 @EnableConfigurationProperties
-@ComponentScan("au.com.qantas.crawler")
+@ComponentScan("au.com.rakesh.crawler")
 @SpringBootConfiguration
 public class ApplicationConfiguration {
 

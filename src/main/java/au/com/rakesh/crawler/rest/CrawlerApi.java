@@ -3,11 +3,11 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package au.com.qantas.crawler.rest;
+package au.com.rakesh.crawler.rest;
 
 import org.springframework.http.ResponseEntity;
 
-import au.com.qantas.crawler.model.PageTreeInfo;
+import au.com.rakesh.crawler.model.PageTreeInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
